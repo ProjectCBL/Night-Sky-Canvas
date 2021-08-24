@@ -129,7 +129,7 @@ class BuildingWindow{
 
     flashPartyLights(){
         if(this.isPartyTime){
-            
+            console.log("Saved");
         }
     }
 
