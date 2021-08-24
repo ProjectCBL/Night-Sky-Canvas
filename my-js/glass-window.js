@@ -95,7 +95,12 @@ class BuildingWindow{
     isFlashing = false;
     isFlashingUp = false;
     isPartyTime = false;
-    color = color(0,0,0,255);
+    color = { 
+        red: 0, 
+        green: 0,  
+        blue: 0,  
+        alpha: 255 
+    }
 
     constructor(corner, dimensions) {
         this.x = corner.x, this.y = corner.y;
