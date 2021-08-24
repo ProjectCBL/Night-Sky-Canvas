@@ -134,7 +134,9 @@ class BuildingWindow{
 
     flashPartyLights(){
         if(this.isPartyTime){
-            console.log("Saved");
+            this.color.red = (this.color.red <= 0) ? 255 : this.color.red - 1;
+            this.color.green = 255 * (mouseX/width);
+            this.color.blue = 255 * (mouseY/height); 
         }
     }
 
