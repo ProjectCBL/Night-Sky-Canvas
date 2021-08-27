@@ -12,6 +12,7 @@ class WindowPattern{
     constructor(center, width, height) {
         this.setBuildingDimensions(center, width, height);
         this.createCornerBoundary();
+        this.createWindowPattern();
     }
 
     createCornerBoundary(){
@@ -39,11 +40,7 @@ class WindowPattern{
         this.height = height;
     }
 
-    draw(){
-        this.drawPattern();
-    }
-
-    drawPattern(){
+    createWindowPattern(){
         switch (this.pattern){
             case ("Fritted"):
                 this._attachFrittedPattern();
@@ -62,30 +59,62 @@ class WindowPattern{
         }
     }
 
-    _attachFrittedPattern(){
+    draw(){
+        this.drawPattern();
+    }
 
+    drawPattern(){
+        for(let i = 0; i < this.windows.length; i++){
+            this.windows[i].draw();
+        }
+    }
+
+    _attachFrittedPattern(){
+        //@TODO: implement fritted pattern design
     }
 
     _attachIndividualSegPattern(){
-        let i = 0;
+        let h = 0;
         let windowDimensions = createVector(
             this.width * 0.1,
             this.height * 0.1
         );
         let spacingX = windowDimensions.x;
+        let spacingY = windowDimensions.y;
 
-        /*while(this.windows[i].){
-
-        }*/
-
+        while(h < 6){
+            for (let i = 0; i < 2; i++){
+                this.windows.push(
+                    this.BuildingWindow(
+                        createVector(
+                            this.bottomLeft.x + (i*(spacingX*2)),
+                            this.bottomLeft.y + (h*(spacingY+(spacingY/2)))
+                        ),
+                        windowDimensions
+                    )
+                );
+            }   
+            for (let i = 0; i < 2; i++){
+                this.windows.push(
+                    this.BuildingWindow(
+                        createVector(
+                            this.bottomRight.x - spacingX - (i*(spacingX*2)),
+                            this.bottomRight.y + (h*(spacingY+(spacingY/2)))
+                        ),
+                        windowDimensions
+                    )
+                );
+            }
+            h++;
+        }
     }
 
     _attachZigZagPattern(){
-
+        //@TODO: implement zig zag pattern design
     }
 
     _attachTwoColunPattern(){
-
+        //@TODO: implement two column pattern design
     }
 
 }
@@ -137,6 +166,9 @@ class BuildingWindow{
             this.color.red = (this.color.red <= 0) ? 255 : this.color.red - 1;
             this.color.green = 255 * (mouseX/width);
             this.color.blue = 255 * (mouseY/height); 
+        }
+        else{
+            this.color.red = this.color.blue = this.color.green = 255
         }
     }
 
