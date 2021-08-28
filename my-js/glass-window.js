@@ -12,8 +12,8 @@ class WindowPattern{
     constructor(center, width, height, pattern=null){
         this.setBuildingDimensions(center, width, height);
         this.createCornerBoundary();
-        this.patter = (pattern != null) ? pattern : this.getRandomPattern();
-        this.createWindowPattern();
+        this.pattern = (pattern != null) ? pattern : this.getRandomPattern();
+        this.createPattern();
     }
 
     getRandomPattern(){
@@ -23,19 +23,19 @@ class WindowPattern{
 
     createCornerBoundary(){
         this.topLeft = createVector(
-            this.center.x - this.width/2 + (this.width/2 * 0.1),
-            this.center.y - this.height/2 + (this.height/2 * 0.1)
+            this.center.x - this.width/2 + (this.width/2 * 0.2),
+            this.center.y - this.height/2 + (this.height/2 * 0.2)
         )
         this.topRight = createVector(
-            this.center.x + this.width/2 - (this.width/2 * 0.1),
-            this.center.y - this.height/2 + (this.height/2 * 0.1)
+            this.center.x + this.width/2 - (this.width/2 * 0.2),
+            this.center.y - this.height/2 + (this.height/2 * 0.2)
         )
         this.bottomLeft = createVector(
-            this.center.x - this.width/2 + (this.width/2 * 0.1),
+            this.center.x - this.width/2 + (this.width/2 * 0.2),
             this.center.y + this.height/2 - (this.height/2 * 0.1)
         )
         this.bottomRight = createVector(
-            this.center.x + this.width/2 - (this.width/2 * 0.1),
+            this.center.x + this.width/2 - (this.width/2 * 0.2),
             this.center.y + this.height/2 - (this.height/2 * 0.1)
         )
     }
@@ -46,13 +46,14 @@ class WindowPattern{
         this.height = height;
     }
 
-    createWindowPattern(){
+    createPattern(){
         switch (this.pattern){
             case ("Fritted"):
                 this._attachFrittedPattern();
                 break;
             case ("Individual Segments"):
                 this._attachIndividualSegPattern();
+                console.log("Something Baka");
                 break;
             case ("Zig Zag"):
                 this._attachZigZagPattern();
@@ -91,10 +92,10 @@ class WindowPattern{
         while(h < 6){
             for (let i = 0; i < 2; i++){
                 this.windows.push(
-                    this.BuildingWindow(
+                    new BuildingWindow(
                         createVector(
                             this.bottomLeft.x + (i*(spacingX*2)),
-                            this.bottomLeft.y + (h*(spacingY+(spacingY/2)))
+                            this.bottomLeft.y - (h*(spacingY+(spacingY/2)))
                         ),
                         windowDimensions
                     )
@@ -102,10 +103,10 @@ class WindowPattern{
             }   
             for (let i = 0; i < 2; i++){
                 this.windows.push(
-                    this.BuildingWindow(
+                    new BuildingWindow(
                         createVector(
                             this.bottomRight.x - spacingX - (i*(spacingX*2)),
-                            this.bottomRight.y + (h*(spacingY+(spacingY/2)))
+                            this.bottomRight.y - (h*(spacingY+(spacingY/2)))
                         ),
                         windowDimensions
                     )
@@ -131,9 +132,9 @@ class BuildingWindow{
     isFlashingUp = false;
     isPartyTime = false;
     color = { 
-        red: 0, 
-        green: 0,  
-        blue: 0,  
+        red: 255, 
+        green: 255,  
+        blue: 255,  
         alpha: 255 
     }
 
@@ -149,13 +150,18 @@ class BuildingWindow{
     draw(){
         this.flashLights();
         this.flashPartyLights();
-        fill(this.color);
+        fill(
+            this.color.red,
+            this.color.green,
+            this.color.blue,
+            this.color.alpha
+        );
         rectMode(CORNERS);
         rect(
             this.x, 
             this.y,
             this.x+this.width, 
-            this.y+this.height
+            this.y-this.height
         );
     }
 

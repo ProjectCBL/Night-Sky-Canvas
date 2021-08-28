@@ -24,8 +24,8 @@ function setup() {
         60,
         100
     );
-    let red = color([255,0,0,255]);
-    console.log(red.__getRed());
+    /*let red = color([255,0,0,255]);
+    console.log(red.__getRed());*/
 }
 
 function draw() {
