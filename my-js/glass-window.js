@@ -9,10 +9,16 @@ class WindowPattern{
     pattern;
     windows = [];
 
-    constructor(center, width, height) {
+    constructor(center, width, height, pattern=null){
         this.setBuildingDimensions(center, width, height);
         this.createCornerBoundary();
+        this.patter = (pattern != null) ? pattern : this.getRandomPattern();
         this.createWindowPattern();
+    }
+
+    getRandomPattern(){
+        let index = Math.floor(Math.random() * glassWindowPatterns.length);
+        return glassWindowPatterns[index];
     }
 
     createCornerBoundary(){
@@ -134,6 +140,10 @@ class BuildingWindow{
     constructor(corner, dimensions) {
         this.x = corner.x, this.y = corner.y;
         this.width = dimensions.x, this.height = dimensions.y;
+    }
+
+    setLights(){
+
     }
 
     draw(){
