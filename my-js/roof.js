@@ -13,7 +13,7 @@ const roofTypeList = [
 ];
 
 class Roof{
-    defaultColor = "black";
+    defaultColor = color(15,15,15);
     heightAdjustment = 0.9;     //Some shapes produce unwanted spacing
                                 //with the stacking method.  This multiplier
                                 //applied to the starting y positions eliminates

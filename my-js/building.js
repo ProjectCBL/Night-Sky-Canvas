@@ -3,7 +3,7 @@ class Building{
     y;
     width;
     height;
-    defaultColor = "black";
+    defaultColor = color(15,15,15);
 
     constructor(x, y, width, height) {
         [this.x, this.y] = [x, y];

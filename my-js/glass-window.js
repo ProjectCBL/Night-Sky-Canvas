@@ -23,19 +23,19 @@ class WindowPattern{
 
     createCornerBoundary(){
         this.topLeft = createVector(
-            this.center.x - this.width/2 + (this.width/2 * 0.2),
-            this.center.y - this.height/2 + (this.height/2 * 0.2)
+            this.center.x - this.width/2 + (this.width/2 * 0.25),
+            this.center.y - this.height/2 + (this.height/2 * 0.1)
         )
         this.topRight = createVector(
-            this.center.x + this.width/2 - (this.width/2 * 0.2),
-            this.center.y - this.height/2 + (this.height/2 * 0.2)
+            this.center.x + this.width/2 - (this.width/2 * 0.25),
+            this.center.y - this.height/2 + (this.height/2 * 0.1)
         )
         this.bottomLeft = createVector(
-            this.center.x - this.width/2 + (this.width/2 * 0.2),
+            this.center.x - this.width/2 + (this.width/2 * 0.25),
             this.center.y + this.height/2 - (this.height/2 * 0.1)
         )
         this.bottomRight = createVector(
-            this.center.x + this.width/2 - (this.width/2 * 0.2),
+            this.center.x + this.width/2 - (this.width/2 * 0.25),
             this.center.y + this.height/2 - (this.height/2 * 0.1)
         )
     }
@@ -81,15 +81,13 @@ class WindowPattern{
     }
 
     _attachIndividualSegPattern(){
-        let h = 0;
         let windowDimensions = createVector(
             this.width * 0.1,
             this.height * 0.1
         );
         let spacingX = windowDimensions.x;
         let spacingY = windowDimensions.y;
-
-        while(h < 6){
+        for(let h = 0; h < 6; h++){
             for (let i = 0; i < 2; i++){
                 this.windows.push(
                     new BuildingWindow(
@@ -112,12 +110,13 @@ class WindowPattern{
                     )
                 );
             }
-            h++;
         }
     }
 
     _attachZigZagPattern(){
-        //@TODO: implement zig zag pattern design
+        for(let h = 0; h < 6; h++){
+
+        }
     }
 
     _attachTwoColunPattern(){
@@ -135,7 +134,7 @@ class BuildingWindow{
         red: 255, 
         green: 255,  
         blue: 255,  
-        alpha: 255 
+        alpha: 200 
     }
 
     constructor(corner, dimensions) {
@@ -167,7 +166,7 @@ class BuildingWindow{
 
     flashLights(){
         if (this.isFlashing){
-            this.color.alpha += (this.isFlashingUp) ?  1 : -1;
+            this.color.alpha += (this.isFlashingUp) ?  0.5 : -0.5;
             if(this.color.alpha >= 255){
                 this.isFlashingUp = false;
             }
