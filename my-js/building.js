@@ -10,7 +10,7 @@ class Building{
         [this.width, this.height] = [width, height];
         this.foundation = new Foundation(x, y, width, height);
         this.roof = new Roof(createVector(x,y), createVector(width, height));
-        this.windowPattern = new WindowPattern(createVector(x,y), width, height, "Individual Segments");
+        this.windowPattern = new WindowPattern(createVector(x,y), width, height, "Two Columns");
     }
 
     draw(){

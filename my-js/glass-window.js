@@ -2,7 +2,7 @@ let glassWindowPatterns = [
     "Fritted",
     "Individual Segments",
     "Zig Zag",
-    "Two Column"
+    "Two Columns"
 ];
 
 class WindowPattern{
@@ -114,13 +114,55 @@ class WindowPattern{
     }
 
     _attachZigZagPattern(){
-        for(let h = 0; h < 6; h++){
+        let windowDimensions = createVector(
+            -1 * this.width * 0.3,
+            this.height * 0.05
+        );
+        let spacingY = windowDimensions.y + windowDimensions.y/2;
 
+        for(let h = 0; h < 12; h++){
+            windowDimensions.x *= -1;
+            this.windows.push(
+                new BuildingWindow(
+                    createVector(
+                        (h % 2 == 0) ? this.bottomLeft.x : this.bottomRight.x, 
+                        this.bottomLeft.y - (spacingY * h)
+                    ),
+                    windowDimensions
+                )
+            );
         }
     }
 
     _attachTwoColunPattern(){
-        //@TODO: implement two column pattern design
+        let windowDimensions = createVector(
+            -1 * this.width * 0.3,
+            this.height * 0.05
+        );
+        let spacingY = windowDimensions.y * 2 ;
+
+        for(let h = 0; h < 8; h++){
+            windowDimensions.x *= -1;
+            this.windows.push(
+                new BuildingWindow(
+                    createVector(
+                        this.bottomLeft.x, 
+                        this.bottomLeft.y - (spacingY * h)
+                    ),
+                    windowDimensions
+                )
+            );
+            windowDimensions.x *= -1;
+            this.windows.push(
+                new BuildingWindow(
+                    createVector(
+                        this.bottomRight.x, 
+                        this.bottomLeft.y - (spacingY * h)
+                    ),
+                    windowDimensions
+                )
+            );
+        }
     }
 
 }
@@ -140,10 +182,13 @@ class BuildingWindow{
     constructor(corner, dimensions) {
         this.x = corner.x, this.y = corner.y;
         this.width = dimensions.x, this.height = dimensions.y;
+        this.setLights();
     }
 
     setLights(){
-
+        this.isFlashing = (getRandomIntFrom(100) > 49) ? true : false;
+        this.isPartyTime = (getRandomIntFrom(100) < 24) ? true : false;
+        this.color.red = (this.isPartyTime) ? 255 * ((getRandomIntFrom(100)+1)/100) : 255;
     }
 
     draw(){
@@ -170,7 +215,7 @@ class BuildingWindow{
             if(this.color.alpha >= 255){
                 this.isFlashingUp = false;
             }
-            else if(this.color.alpha <= 200){
+            else if(this.color.alpha <= 100){
                 this.isFlashingUp = true;
             }
         }
