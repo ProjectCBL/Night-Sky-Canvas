@@ -77,7 +77,55 @@ class WindowPattern{
     }
 
     _attachFrittedPattern(){
-        //@TODO: implement fritted pattern design
+        let windowDimensions = createVector(
+            this.width * 0.1,
+            this.height * 0.1
+        );
+        let spacingX = windowDimensions.x;
+        let spacingY = windowDimensions.y;
+        for(let h = 0; h < 6; h++){
+            //Left Outer Windows
+            for (let i = 0; i < 2; i++){
+                this.windows.push(
+                    new BuildingWindow(
+                        createVector(
+                            this.bottomLeft.x 
+                            + (i*(spacingX+(spacingX/2))) 
+                            + windowDimensions.x/2 
+                            - windowDimensions.x/4,
+                            this.bottomLeft.y - (h*(spacingY+(spacingY/2)))
+                        ),
+                        windowDimensions
+                    )
+                );
+            }
+            //Center Windows
+            this.windows.push(
+                new BuildingWindow(
+                    createVector(
+                        this.center.x - windowDimensions.x/2,
+                        this.bottomLeft.y - (h*(spacingY+(spacingY/2)))
+                    ),
+                    windowDimensions
+                )
+            );
+            //Right Outer Windows
+            for (let i = 0; i < 2; i++){
+                this.windows.push(
+                    new BuildingWindow(
+                        createVector(
+                            this.bottomRight.x 
+                            - spacingX 
+                            - (i*(spacingX+(spacingX/2))) 
+                            - windowDimensions.x/2
+                            + windowDimensions.x/4,
+                            this.bottomRight.y - (h*(spacingY+(spacingY/2)))
+                        ),
+                        windowDimensions
+                    )
+                );
+            }
+        }
     }
 
     _attachIndividualSegPattern(){
