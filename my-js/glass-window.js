@@ -259,11 +259,11 @@ class BuildingWindow{
 
     flashLights(){
         if (this.isFlashing){
-            this.color.alpha += (this.isFlashingUp) ?  1 : -1;
+            this.color.alpha += (this.isFlashingUp) ?  1.5 : -1.5;
             if(this.color.alpha >= 255){
                 this.isFlashingUp = false;
             }
-            else if(this.color.alpha <= 100){
+            else if(this.color.alpha <= 125){
                 this.isFlashingUp = true;
             }
         }
