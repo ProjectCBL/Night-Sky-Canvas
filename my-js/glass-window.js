@@ -234,9 +234,8 @@ class BuildingWindow{
     }
 
     setLights(){
-        //@TO-DO: Fix set light randomness (leaning towards less of each)
-        this.isFlashing = (getRandomIntFrom(100) > 49) ? true : false;
-        this.isPartyTime = (getRandomIntFrom(100) < 24) ? true : false;
+        this.isFlashing = (getRandomIntFrom(100) < 30) ? true : false;
+        this.isPartyTime = (getRandomIntFrom(100) < 10) ? true : false;
         this.color.red = (this.isPartyTime) ? 255 * ((getRandomIntFrom(100)+1)/100) : 255;
     }
 
@@ -260,7 +259,7 @@ class BuildingWindow{
 
     flashLights(){
         if (this.isFlashing){
-            this.color.alpha += (this.isFlashingUp) ?  0.5 : -0.5;
+            this.color.alpha += (this.isFlashingUp) ?  1 : -1;
             if(this.color.alpha >= 255){
                 this.isFlashingUp = false;
             }
