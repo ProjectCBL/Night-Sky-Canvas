@@ -1,4 +1,4 @@
-let glassWindowPatterns = [
+const glassWindowPatterns = [
     "Fritted",
     "Individual Segments",
     "Zig Zag",
