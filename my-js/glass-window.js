@@ -189,7 +189,7 @@ class WindowPattern{
         );
         let spacingY = windowDimensions.y * 2 ;
 
-        for(let h = 0; h < 8; h++){
+        for(let h = 0; h < 9; h++){
             windowDimensions.x *= -1;
             this.windows.push(
                 new BuildingWindow(
