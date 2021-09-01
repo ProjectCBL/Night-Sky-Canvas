@@ -186,7 +186,7 @@ class Roof{
     _layMultiLayerAntennaRoofing(){
         let limitOfStack = 2;
         let edgeSpacing = (this.dimensions.x * 0.15 * limitOfStack) * 1.15;
-        let antennaHeight = (this.dimensions.y * 0.15 * limitOfStack) * 1.5;
+        let antennaHeight = (this.dimensions.y * 0.15 * limitOfStack) * 0.50;
         this._layMultiLayerRoofing(limitOfStack);
         stroke(this.defaultColor);
         strokeWeight(1);
