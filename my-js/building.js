@@ -5,12 +5,12 @@ class Building{
     height;
     defaultColor = color(15,15,15);
 
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, pattern=true) {
         [this.x, this.y] = [x, y];
         [this.width, this.height] = [width, height];
         this.foundation = new Foundation(x, y, width, height);
         this.roof = new Roof(createVector(x,y), createVector(width, height));
-        this.windowPattern = new WindowPattern(createVector(x,y), width, height);
+        this.windowPattern = (pattern) ? new WindowPattern(createVector(x,y), width, height) : null;
     }
 
     draw(){
@@ -18,7 +18,9 @@ class Building{
         fill(this.defaultColor);
         this.roof.draw();
         this.foundation.draw();
-        this.windowPattern.draw();
+        if (this.windowPattern != null) {
+            this.windowPattern.draw();
+        }
     }
 
 }
