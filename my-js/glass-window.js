@@ -79,11 +79,11 @@ class WindowPattern{
     _attachFrittedPattern(){
         let windowDimensions = createVector(
             this.width * 0.1,
-            this.height * 0.1
+            this.height * 0.05
         );
         let spacingX = windowDimensions.x;
         let spacingY = windowDimensions.y;
-        for(let h = 0; h < 6; h++){
+        for(let h = 0; h < 12; h++){
             //Left Outer Windows
             for (let i = 0; i < 2; i++){
                 this.windows.push(
@@ -131,11 +131,11 @@ class WindowPattern{
     _attachIndividualSegPattern(){
         let windowDimensions = createVector(
             this.width * 0.1,
-            this.height * 0.1
+            this.height * 0.05
         );
         let spacingX = windowDimensions.x;
         let spacingY = windowDimensions.y;
-        for(let h = 0; h < 6; h++){
+        for(let h = 0; h < 12; h++){
             for (let i = 0; i < 2; i++){
                 this.windows.push(
                     new BuildingWindow(
