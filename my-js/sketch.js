@@ -46,6 +46,8 @@ function windowResized(){
         window.innerWidth - (window.innerWidth*0.1), 
         500
     );
+    screen.width = window.innerWidth - (window.innerWidth * 0.1);
+    generateBuildingsCollection(buildingLayers, 0.4, true);
 }
 
 function drawAllBuildings(){
@@ -57,12 +59,25 @@ function drawAllBuildings(){
     }
 }
 
-function generateBuildingsCollection(layers, heightAdjustment){
+function generateBuildingsCollection(layers, heightAdjustment, generateMore=false){
 
     let loop  = 0;
     for(let layer in layers){
 
         let buildingColor = buildingLayers[layer].color;
+
+        if (generateMore){
+            let buildingX = buildingLayers[layer]
+            .buildings[buildingLayers[layer].buildings.length-1]
+            .x;
+
+            let buildingWidth = buildingLayers[layer]
+            .buildings[buildingLayers[layer].buildings.length-1]
+            .width;
+
+            coord.start.x = buildingX;
+            coord.end.x = screen.width;
+        }
 
         while(true){
             let newStructure = getNewBuildingStructure();
@@ -73,7 +88,7 @@ function generateBuildingsCollection(layers, heightAdjustment){
                 const cutoffIndex = getRandomIntFrom(cutoffRanges.length);
                 coord.start.x -= newStructure.width/2 * cutoffRanges[cutoffIndex];
             }
-            else if(coord.start.x > coord.end.x || coord.start.x + newStructure.width > coord.end.x){
+            else if(coord.start.x > coord.end.x){
                 break;
             }
             else{
