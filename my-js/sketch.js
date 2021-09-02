@@ -26,17 +26,25 @@ const multipliers = {
     width: [1.0, 1.1, 1.2, 1.3]
 };
 const buildingSpace = 30;
+let moon;
+
 
 function setup() {
 
     let canvas = createCanvas(screen.width, screen.height);
     canvas.id("myCanvas");
     generateBuildingsCollection(buildingLayers, 0.4);
+    moon = new Moon(
+        screen.width/2, 
+        screen.height-100, 
+        screen.width * 0.40
+    );
 
 }
 
 function draw() {
     background(backgroundColor);
+    moon.draw();
     drawAllBuildings();
     drawBottomFade();
 }
