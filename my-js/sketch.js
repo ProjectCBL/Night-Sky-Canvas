@@ -69,11 +69,11 @@ function generateBuildingsCollection(layers, heightAdjustment){
             newStructure.height *= 1.0 + (heightAdjustment * loop);
     
             if (coord.start.x == 0){
-                const cutoffRanges = [0.1, 0.15, 0.2];
+                const cutoffRanges = [0.3, 0.35, 0.4, 0.45];
                 const cutoffIndex = getRandomIntFrom(cutoffRanges.length);
-                coord.start.x -= newStructure.width * cutoffRanges[cutoffIndex];
+                coord.start.x -= newStructure.width/2 * cutoffRanges[cutoffIndex];
             }
-            else if(coord.start.x > coord.end.x){
+            else if(coord.start.x > coord.end.x || coord.start.x + newStructure.width > coord.end.x){
                 break;
             }
             else{
