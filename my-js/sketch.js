@@ -1,4 +1,5 @@
 let backgroundColor = "#08141e";
+let moon;
 let buildingLayers = {
     firstLayer:{
         buildings:[],
@@ -26,7 +27,6 @@ const multipliers = {
     width: [1.0, 1.1, 1.2, 1.3]
 };
 const buildingSpace = 30;
-let moon;
 
 
 function setup() {
@@ -37,7 +37,7 @@ function setup() {
     moon = new Moon(
         screen.width/2, 
         screen.height-100, 
-        screen.width * 0.40
+        screen.width/2 
     );
 
 }
@@ -56,6 +56,10 @@ function windowResized(){
     );
     screen.width = window.innerWidth - (window.innerWidth * 0.1);
     generateBuildingsCollection(buildingLayers, 0.4, true);
+    moon.resetMoonTo(
+        screen.width/2, 
+        screen.width/2
+    );
 }
 
 function drawAllBuildings(){
