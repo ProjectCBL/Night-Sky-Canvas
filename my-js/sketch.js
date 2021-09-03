@@ -36,7 +36,7 @@ function setup() {
     generateBuildingsCollection(buildingLayers, 0.4);
     moon = new Moon(
         screen.width/2, 
-        screen.height-100, 
+        screen.height-50, 
         screen.width/2 
     );
 

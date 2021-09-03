@@ -14,6 +14,7 @@ class Moon{
             this.x, 
             this.y, 
             this.radius,
+            this.radius
         );
     }
 
