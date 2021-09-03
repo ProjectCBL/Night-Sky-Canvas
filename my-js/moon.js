@@ -17,4 +17,15 @@ class Moon{
         );
     }
 
+    resetMoonTo(x, radius){
+        /* Resets the moon position to the center
+        and resizes the moon to fit the screen */
+        this.x = x;
+        this.radius = limit(
+            radius,
+            200,
+            19280/2
+        );
+    }
+
 }
