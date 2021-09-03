@@ -1,6 +1,7 @@
 let backgroundColor = "#08141e";
 let moon;
 let stars = [];
+let lastStarLoc = 0;
 let buildingLayers = {
     firstLayer:{
         buildings:[],
@@ -53,15 +54,43 @@ function draw() {
 }
 
 function windowResized(){
-    let tempWidth = screen.width;
     resizeCanvas(
         window.innerWidth - (window.innerWidth*0.1), 
         500
     );
     screen.width = window.innerWidth - (window.innerWidth * 0.1);
-    generateStarLayout(tempWidth);
+    generateStarLayout();
     generateBuildingsCollection(buildingLayers, 0.4, true);
     moon.resetMoonTo(screen.width/2, screen.width/2);
+}
+
+function drawAllStars(){
+    for(let i = 0; i < stars.length; i++){
+        stars[i].draw();
+    }
+}
+
+function generateStarLayout(){
+
+    const startingX = lastStarLoc;
+    const maxHeight = 325;
+    const maxWidth = screen.width-10;
+    const starSpacing = 25;
+    const spacingFactors = [0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
+
+    if ((maxWidth - lastStarLoc < starSpacing && maxWidth - lastStarLoc > 0) || lastStarLoc >= maxWidth) return;
+
+    for(let y = 0; y + starSpacing < maxHeight; y += starSpacing){
+        for(let x = startingX; x + starSpacing < maxWidth; x += starSpacing){
+            if(getRandomIntFrom(100) > 80){
+                let starX = x + starSpacing*spacingFactors[getRandomIntFrom(spacingFactors.length)]; 
+                let starY = y + starSpacing*spacingFactors[getRandomIntFrom(spacingFactors.length)];
+                stars.push(new Star(starX, starY));
+            }
+            lastStarLoc = (x > lastStarLoc) ? x : lastStarLoc;   
+        }
+    }
+
 }
 
 function drawAllBuildings(){
@@ -71,34 +100,6 @@ function drawAllBuildings(){
     for(let i = 0; i < buildingLayers.firstLayer.buildings.length; i++){
         buildingLayers.firstLayer.buildings[i].draw();
     }
-}
-
-function drawAllStars(){
-    for(let i = 0; i < stars.length; i++){
-        stars[i].draw();
-    }
-}
-
-function generateStarLayout(startingCoordinate = 0){
-
-    const maxHeight = 325;
-    const maxWidth = screen.width - 10;
-    const starSpacing = 25;
-    const spacingFactors = [0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
-
-    for(let y = 0; y + starSpacing < maxHeight; y += starSpacing){
-        for(let x = startingCoordinate; x + starSpacing < maxWidth; x += starSpacing){
-            if(getRandomIntFrom(100) > 80){
-                
-                let starX = x + starSpacing*spacingFactors[getRandomIntFrom(spacingFactors.length)]; 
-                let starY = y + starSpacing*spacingFactors[getRandomIntFrom(spacingFactors.length)];
-                stars.push(new Star(starX, starY));
-            }   
-        }
-    }
-
-    console.log(stars);
-
 }
 
 function generateBuildingsCollection(layers, heightAdjustment, generateMore=false){
