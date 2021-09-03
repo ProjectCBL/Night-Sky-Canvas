@@ -30,3 +30,42 @@ class Moon{
     }
 
 }
+
+class Star{
+
+    radius = 10;
+    twinkleBright = false;
+    defaultColor = {
+        r: 246,
+        g: 214,
+        b: 189,
+        a: 255
+    };
+
+    constructor(x, y){
+        [this.x, this.y] = [x,y];
+        this.defaultColor.a = getRandomIntFrom(255);
+    }
+    
+    draw(){
+        this.twinkle();
+        this.drawStar();
+    }
+
+    drawStar(){
+        fill(
+            this.defaultColor.r,
+            this.defaultColor.g,
+            this.defaultColor.b,
+            this.defaultColor.a
+        );
+        ellipse(this.x, this.y, this.radius);
+    }
+
+    twinkle(){
+        this.twinkleBright = (this.defaultColor.a > 255) ? false : 
+        (this.defaultColor.a < 100) ? true : this.twinkleBright;
+        this.defaultColor.a += (this.twinkleBright) ? 0.5 : -0.5;
+    }
+
+}
