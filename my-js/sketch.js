@@ -71,6 +71,34 @@ function drawAllBuildings(){
     }
 }
 
+function drawAllStars(){
+    for(let i = 0; i < stars.length; i++){
+        stars[i].draw();
+    }
+}
+
+function generateStarLayout(startingCoordinate = 0){
+
+    const maxHeight = 325;
+    const maxWidth = screen.width - 10;
+    const starSpacing = 25;
+    const spacingFactors = [0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
+
+    for(let y = 0; y + starSpacing < maxHeight; y += starSpacing){
+        for(let x = startingCoordinate; x + starSpacing < maxWidth; x += starSpacing){
+            if(getRandomIntFrom(100) > 80){
+                
+                let starX = x + starSpacing*spacingFactors[getRandomIntFrom(spacingFactors.length)]; 
+                let starY = y + starSpacing*spacingFactors[getRandomIntFrom(spacingFactors.length)];
+                stars.push(new Star(starX, starY));
+            }   
+        }
+    }
+
+    console.log(stars);
+
+}
+
 function generateBuildingsCollection(layers, heightAdjustment, generateMore=false){
 
     let loop  = 0;
