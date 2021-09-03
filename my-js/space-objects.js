@@ -53,6 +53,7 @@ class Star{
     }
 
     drawStar(){
+        noStroke();
         fill(
             this.defaultColor.r,
             this.defaultColor.g,
