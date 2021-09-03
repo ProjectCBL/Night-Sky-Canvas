@@ -59,9 +59,15 @@ function windowResized(){
         500
     );
     screen.width = window.innerWidth - (window.innerWidth * 0.1);
-    generateStarLayout();
+
+    if(lastStarLoc < screen.width - 50){
+        generateStarLayout();
+    }
+
     generateBuildingsCollection(buildingLayers, 0.4, true);
     moon.resetMoonTo(screen.width/2, screen.width/2);
+
+    lastStarLoc = (screen.width > lastStarLoc) ? screen.width : lastStarLoc;
 }
 
 function drawAllStars(){
@@ -77,8 +83,6 @@ function generateStarLayout(){
     const maxWidth = screen.width-10;
     const starSpacing = 25;
     const spacingFactors = [0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0];
-
-    if ((maxWidth - lastStarLoc < starSpacing && maxWidth - lastStarLoc > 0) || lastStarLoc >= maxWidth) return;
 
     for(let y = 0; y + starSpacing < maxHeight; y += starSpacing){
         for(let x = startingX; x + starSpacing < maxWidth; x += starSpacing){
