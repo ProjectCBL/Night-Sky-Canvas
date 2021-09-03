@@ -1,5 +1,6 @@
 let backgroundColor = "#08141e";
 let moon;
+let stars = [];
 let buildingLayers = {
     firstLayer:{
         buildings:[],
@@ -34,6 +35,7 @@ function setup() {
     let canvas = createCanvas(screen.width, screen.height);
     canvas.id("myCanvas");
     generateBuildingsCollection(buildingLayers, 0.4);
+    generateStarLayout();
     moon = new Moon(
         screen.width/2, 
         screen.height-50, 
@@ -44,22 +46,22 @@ function setup() {
 
 function draw() {
     background(backgroundColor);
+    drawAllStars();
     moon.draw();
     drawAllBuildings();
     drawBottomFade();
 }
 
 function windowResized(){
+    let tempWidth = screen.width;
     resizeCanvas(
         window.innerWidth - (window.innerWidth*0.1), 
         500
     );
     screen.width = window.innerWidth - (window.innerWidth * 0.1);
+    generateStarLayout(tempWidth);
     generateBuildingsCollection(buildingLayers, 0.4, true);
-    moon.resetMoonTo(
-        screen.width/2, 
-        screen.width/2
-    );
+    moon.resetMoonTo(screen.width/2, screen.width/2);
 }
 
 function drawAllBuildings(){
