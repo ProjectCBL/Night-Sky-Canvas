@@ -53,7 +53,6 @@ class WindowPattern{
                 break;
             case ("Individual Segments"):
                 this._attachIndividualSegPattern();
-                console.log("Something Baka");
                 break;
             case ("Zig Zag"):
                 this._attachZigZagPattern();
